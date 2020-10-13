@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f811bce2-9c52-46bc-913c-b1d46f945f5f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../es-demo/es-demo.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../es-demo/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../es-demo/src/main/java/com/baidu/lcy/es/RunTestEsApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../es-demo/src/main/java/com/baidu/lcy/es/entity/GoodsEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../es-demo/src/main/java/com/baidu/lcy/es/repository/GoodsEsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../es-demo/src/main/java/com/baidu/lcy/es/util/ESHighLightUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../es-demo/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../es-demo/src/test/java/EsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mingrui-shop-parent/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-service-api/mingrui-shop-service-api-search/mingrui-shop-service-api-search.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-service-api/mingrui-shop-service-api-search/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../thymeleaf-demo/src/main/java/com/baidu/demo/RunThtmeleafApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../thymeleaf-demo/src/main/java/com/baidu/demo/controller/TestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../thymeleaf-demo/src/main/java/com/baidu/demo/entity/TestEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../thymeleaf-demo/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../thymeleaf-demo/src/main/resources/templates/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../thymeleaf-demo/thymeleaf-demo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mingrui-shop-parent/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mingrui-shop-parent/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mingrui-shop-parent/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-basics/mingrui-shop-basic-update-server/target/classes/com/baidu/lcy/shop/RunUpdateApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-basics/mingrui-shop-basic-update-server/target/classes/com/baidu/lcy/shop/config/FastClientImporter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-basics/mingrui-shop-basic-update-server/target/classes/com/baidu/lcy/shop/global/GlobalCorsConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-basics/mingrui-shop-basic-update-server/target/classes/com/baidu/lcy/shop/update/controller/FastDFSUploadController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-basics/mingrui-shop-basic-update-server/target/classes/com/baidu/lcy/shop/update/controller/UpdateController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-service-api/mingrui-shop-service-api-xxx/target/classes/com/baidu/lcy/shop/service/GoodsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-service-api/mingrui-shop-service-api-xxx/target/classes/com/baidu/lcy/shop/service/GoodsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-service-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-service-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-service/mingrui-shop-service-xxx/src/main/java/com/baidu/lcy/shop/service/impl/GoodsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/mingrui-shop-parent/mingrui-shop-service/mingrui-shop-service-xxx/src/main/java/com/baidu/lcy/shop/service/impl/GoodsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mingrui-shop-parent/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mingrui-shop-parent/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../gongju/apache-maven-3.6.2" />
+        <option name="userSettingsFile" value="D:\gongju\apache-maven-3.6.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="1.8" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1h3EHKuazFSRvoFm6tVys20upUy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f811bce2-9c52-46bc-913c-b1d46f945f5f" name="Default Changelist" comment="" />
+      <created>1599231286856</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599231286856</updated>
+      <workItem from="1599231289394" duration="21000" />
+      <workItem from="1600255487701" duration="40000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+</project>
