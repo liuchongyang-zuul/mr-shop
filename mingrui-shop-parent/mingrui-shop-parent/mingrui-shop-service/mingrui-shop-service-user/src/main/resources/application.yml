@@ -2,6 +2,27 @@ server:
   port: 8500
 
 spring:
+  # 整合redis配置
+  redis:
+    # 数据库标识，可以配置多个redis使用不同的标识区分
+    database: 0
+    # redisIP地址
+    host: 119.45.205.133
+    # redis端口号
+    port: 6379
+    # redis密码
+    password: 123456
+    # redis连接池的配置
+    jedis:
+      pool:
+        #最大连接数据库连接数,设 0 为没有限制
+        max-active: 8
+        #最大等待连接中的数量,设 0 为没有限制
+        max-idle: 8
+        #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+        max-wait: -1ms
+        #最小等待连接中的数量,设 0 为没有限制
+        min-idle: 0
   application:
     name: user-server
   datasource:

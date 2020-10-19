@@ -15,6 +15,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mingrui-shop-commom-core</module>
+        <module>mingrui-shop-common-oauth</module>
     </modules>
     <dependencies>
         <!--帮助开发人员快速生成API文档-->

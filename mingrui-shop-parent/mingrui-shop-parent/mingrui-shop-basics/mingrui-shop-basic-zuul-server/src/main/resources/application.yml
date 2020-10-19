@@ -12,6 +12,7 @@ zuul:
     xxx-service: /manage/**
     search-server: /search/**
     user-server: /user-center/**
+    oauth-server: /oauth/**
 #zuul:
 #  # 声明路由
 #  routes:
@@ -31,6 +32,8 @@ zuul:
   # 忽略上传服务
   ignored-services:
     -upload-server
+  add-host-header: true
+  sensitive-headers:
 #配置负载
 ribbon:
   ConnectTimeout: 250 # 连接超时时间(ms)
@@ -51,3 +54,12 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+
+mrshop:
+  #声明不进行拦截的请求用,分隔
+  filter:
+    excludes: /api/oauth/login,/api/user-center/user/register
+  jwt:
+    pubKeyPath: D:\res\rea.pub # 公钥地址(私钥加密,公钥解密)
+    cookieName: MRSHOP_TOKEN

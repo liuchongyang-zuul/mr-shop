@@ -12,9 +12,11 @@
         <module name="mingrui-shop-service-api-user" />
         <module name="mingrui-shop-commom-core" />
         <module name="mingrui-shop-service-template" />
+        <module name="mingrui-shop-common-oauth" />
         <module name="mingrui-shop-service-api-xxx" />
         <module name="mingrui-shop-basic-zuul-server" />
         <module name="mingrui-shop-basic-update-server" />
+        <module name="mingrui-shop-basic-user-oauth" />
         <module name="mingrui-shop-service-api-template" />
         <module name="es-beam" />
         <module name="mingrui-shop-basic-eureka-server" />
@@ -35,10 +37,12 @@
       <module name="es-demo" options="-parameters" />
       <module name="mingrui-shop-basic-eureka-server" options="-parameters" />
       <module name="mingrui-shop-basic-update-server" options="-parameters" />
+      <module name="mingrui-shop-basic-user-oauth" options="-parameters" />
       <module name="mingrui-shop-basic-zuul-server" options="-parameters" />
       <module name="mingrui-shop-basics" options="-parameters" />
       <module name="mingrui-shop-commom-core" options="-parameters" />
       <module name="mingrui-shop-commoms" options="-parameters" />
+      <module name="mingrui-shop-common-oauth" options="-parameters" />
       <module name="mingrui-shop-service" options="-parameters" />
       <module name="mingrui-shop-service-api" options="-parameters" />
       <module name="mingrui-shop-service-api-search" options="-parameters" />
