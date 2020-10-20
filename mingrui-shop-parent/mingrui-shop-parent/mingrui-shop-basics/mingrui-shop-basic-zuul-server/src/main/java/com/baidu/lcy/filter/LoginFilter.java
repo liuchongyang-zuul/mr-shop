@@ -1,8 +1,8 @@
 package com.baidu.lcy.filter;
 
 import com.baidu.lcy.config.JwtConfig;
-import com.baidu.shop.utils.CookieUtils;
-import com.baidu.shop.utils.JwtUtils;
+import com.baidu.lcy.shop.utils.CookieUtils;
+import com.baidu.lcy.shop.utils.JwtUtils;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;

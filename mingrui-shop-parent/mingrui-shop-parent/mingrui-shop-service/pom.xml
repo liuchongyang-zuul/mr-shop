@@ -18,6 +18,7 @@
         <module>mingrui-shop-service-search</module>
         <module>mingrui-shop-service-template</module>
         <module>mingrui-shop-service-user</module>
+        <module>mingrui-shop-service-car</module>
     </modules>
 
     <dependencies>

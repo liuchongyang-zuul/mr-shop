@@ -1,7 +1,7 @@
 package com.baidu.lcy.config;
 
 
-import com.baidu.shop.utils.RsaUtils;
+import com.baidu.lcy.shop.utils.RsaUtils;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

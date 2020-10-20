@@ -1,8 +1,8 @@
 package com.mr.test;
 
-import com.baidu.shop.dto.UserInfo;
-import com.baidu.shop.utils.JwtUtils;
-import com.baidu.shop.utils.RsaUtils;
+import com.baidu.lcy.shop.dto.UserInfo;
+import com.baidu.lcy.shop.utils.JwtUtils;
+import com.baidu.lcy.shop.utils.RsaUtils;
 import org.junit.Before;
 import org.junit.Test;
 
