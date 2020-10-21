@@ -49,7 +49,7 @@ spring:
       # 连接超时时间 默认30000 毫秒 如果小于250毫秒，则被重置回30秒
       connection-timeout: 30000
       # 验证超时时间默认5000毫秒 如果小于250毫秒，则会被重置回5秒
-      validation-timeout: 5000
+      validation-timeout: 50000
       # 设置连接在连接池中的存货时间 如果不等于0且小于30秒则会被重置回30分钟
       max-lifetime: 1800000
 # 通用mapper

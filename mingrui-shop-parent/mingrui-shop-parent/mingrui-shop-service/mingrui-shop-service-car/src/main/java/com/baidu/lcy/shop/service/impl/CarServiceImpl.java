@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -91,6 +92,42 @@ public class CarServiceImpl extends BaseApiService implements CarService {
         list.stream().forEach(car -> {
             this.addCar(car,token);
         });
+
+        return this.setResultSuccess();
+    }
+
+    @Override
+    public Result<List<Car>> getUserGoodsCar(String token) {
+        List<Car> list = new ArrayList<>();
+
+        try {
+            UserInfo userInfo = JwtUtils.getInfoFromToken(token, jwtConfig.getPublicKey());
+            Map<String, String> hash = redisRepository.getHash(userInfo.getId() + "");
+            hash.forEach((key,value) ->{
+                list.add(JSONUtil.toBean(value,Car.class));
+            });
+            return this.setResultSuccess(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return this.setResultError("内部");
+    }
+
+    @Override
+    public Result<List<Car>> carNumUpdate(Long skuId, Integer type, String token) {
+
+        try {
+            UserInfo info = JwtUtils.getInfoFromToken(token, jwtConfig.getPublicKey());
+
+            Car hash = redisRepository.getHash(info.getId() + "", skuId + "", Car.class);
+
+            if(hash != null){
+                hash.setNum(type == 1 ? hash.getNum() +1 : hash.getNum() -1);
+            }
+            redisRepository.setHash(info.getId()+"",hash.getSkuId() +"" ,JSONUtil.toJsonString(hash));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return this.setResultSuccess();
     }
