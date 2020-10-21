@@ -19,6 +19,7 @@
         <module>mingrui-shop-service-api-template</module>
         <module>mingrui-shop-service-api-user</module>
         <module>mingrui-shop-service-api-car</module>
+        <module>mingrui-shop-service-api-order</module>
     </modules>
 
     <dependencies>

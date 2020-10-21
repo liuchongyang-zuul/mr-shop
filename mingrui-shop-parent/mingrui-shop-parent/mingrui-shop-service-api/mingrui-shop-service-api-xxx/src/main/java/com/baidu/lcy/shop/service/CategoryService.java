@@ -2,8 +2,8 @@ package com.baidu.lcy.shop.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baidu.lcy.shop.base.Result;
-import com.baidu.lcy.shop.entity.CategoryEntity;
 import com.baidu.lcy.shop.validate.group.MingRuiOperation;
+import com.baidu.lcy.shop.entity.CategoryEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;

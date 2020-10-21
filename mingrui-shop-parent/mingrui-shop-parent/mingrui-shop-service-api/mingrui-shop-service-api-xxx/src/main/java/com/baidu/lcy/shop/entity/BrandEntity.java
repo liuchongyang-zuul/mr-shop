@@ -1,16 +1,12 @@
 package com.baidu.lcy.shop.entity;
 
-import com.baidu.lcy.shop.validate.group.MingRuiOperation;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 /**
  * @ClassName BrandEntity

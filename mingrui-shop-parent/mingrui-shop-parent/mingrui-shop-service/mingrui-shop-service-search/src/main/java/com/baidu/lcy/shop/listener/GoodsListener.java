@@ -1,8 +1,8 @@
 package com.baidu.lcy.shop.listener;
 
 
-import com.baidu.lcy.shop.constant.MqMessageConstant;
 import com.baidu.lcy.shop.service.ShopElasticsearchService;
+import com.baidu.lcy.shop.constant.MqMessageConstant;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.ExchangeTypes;

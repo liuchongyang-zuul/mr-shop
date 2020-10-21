@@ -1,6 +1,8 @@
 package com.baidu.lcy.shop.service.impl;
 
 
+import com.baidu.lcy.shop.service.BrandService;
+import com.baidu.lcy.shop.utils.ObjectUtil;
 import com.baidu.lcy.shop.base.BaseApiService;
 import com.baidu.lcy.shop.base.Result;
 import com.baidu.lcy.shop.dto.BrandDTO;
@@ -10,9 +12,7 @@ import com.baidu.lcy.shop.entity.SpuEntity;
 import com.baidu.lcy.shop.mapper.BrandMapper;
 import com.baidu.lcy.shop.mapper.CategoryBrandMapper;
 import com.baidu.lcy.shop.mapper.GoodsMapper;
-import com.baidu.lcy.shop.service.BrandService;
 import com.baidu.lcy.shop.utils.BaiduBeanUtil;
-import com.baidu.lcy.shop.utils.ObjectUtil;
 import com.baidu.lcy.shop.utils.PinYinUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

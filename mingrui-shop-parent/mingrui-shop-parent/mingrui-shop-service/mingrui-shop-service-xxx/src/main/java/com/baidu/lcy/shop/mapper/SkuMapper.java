@@ -1,7 +1,7 @@
 package com.baidu.lcy.shop.mapper;
 
-import com.baidu.lcy.shop.dto.SkuDTO;
 import com.baidu.lcy.shop.entity.SkuEntity;
+import com.baidu.lcy.shop.dto.SkuDTO;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.additional.idlist.DeleteByIdListMapper;
 import tk.mybatis.mapper.common.Mapper;

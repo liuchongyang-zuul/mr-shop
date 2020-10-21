@@ -1,9 +1,9 @@
 package com.baidu.lcy.shop.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baidu.lcy.shop.base.Result;
 import com.baidu.lcy.shop.dto.UserDTO;
 import com.baidu.lcy.shop.entity.UserEntity;
+import com.baidu.lcy.shop.base.Result;
 import com.baidu.lcy.shop.validate.group.MingRuiOperation;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

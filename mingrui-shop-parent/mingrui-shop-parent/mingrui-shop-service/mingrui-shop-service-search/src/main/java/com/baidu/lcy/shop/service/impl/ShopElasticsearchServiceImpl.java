@@ -86,7 +86,7 @@ public class ShopElasticsearchServiceImpl extends BaseApiService implements Shop
     }
 
     @Override
-    public GoodsResponse search(String search,Integer page,String filter) {
+    public GoodsResponse search(String search, Integer page, String filter) {
 
         if(StringUtil.isEmpty(search)) throw new RuntimeException("查询字段不能为空");
 
