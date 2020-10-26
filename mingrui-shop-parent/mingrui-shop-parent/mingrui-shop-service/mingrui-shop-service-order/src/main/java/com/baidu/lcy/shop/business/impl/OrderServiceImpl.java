@@ -6,6 +6,7 @@ import com.baidu.lcy.shop.business.OrderService;
 import com.baidu.lcy.shop.config.JwtConfig;
 import com.baidu.lcy.shop.dto.Car;
 import com.baidu.lcy.shop.dto.OrderDTO;
+import com.baidu.lcy.shop.dto.OrderInfo;
 import com.baidu.lcy.shop.dto.UserInfo;
 import com.baidu.lcy.shop.entity.OrderDetailEntity;
 import com.baidu.lcy.shop.entity.OrderEntity;
@@ -15,9 +16,11 @@ import com.baidu.lcy.shop.mapper.OrderMapper;
 import com.baidu.lcy.shop.mapper.OrderStatusMapper;
 import com.baidu.lcy.shop.redis.repository.RedisRepository;
 import com.baidu.lcy.shop.status.HTTPStatus;
+import com.baidu.lcy.shop.utils.BaiduBeanUtil;
 import com.baidu.lcy.shop.utils.IdWorker;
 import com.baidu.lcy.shop.utils.JwtUtils;
 import org.springframework.web.bind.annotation.RestController;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -102,6 +105,10 @@ public class OrderServiceImpl  extends BaseApiService implements OrderService {
             orderDetailMapper.insertList(orderDetailList);
             orderStatusMapper.insertSelective(orderStatusEntity);
 
+            orderDetailList.stream().forEach(orderDetailEntity -> {
+                orderDetailMapper.updataEntity(orderDetailEntity.getSkuId(),orderDetailEntity.getNum());
+            });
+
             Arrays.asList(orderDTO.getSkuIds().split(",")).stream().forEach(skuidStr -> {
                 redisRepository.delHash(userInfo.getId() + "",skuidStr);
             });
@@ -110,5 +117,22 @@ public class OrderServiceImpl  extends BaseApiService implements OrderService {
         }
 
         return this.setResult(HTTPStatus.OK,"",nextId + "");
+    }
+
+    @Override
+    public Result<OrderInfo> getOrderInfoByOrderId(Long orderId) {
+        OrderEntity orderEntity = orderMapper.selectByPrimaryKey(orderId);
+        OrderInfo orderInfo = BaiduBeanUtil.copyProperties(orderEntity, OrderInfo.class);
+
+        Example example = new Example(OrderDetailEntity.class);
+        example.createCriteria().andEqualTo("orderId",orderInfo.getOrderId());
+
+        List<OrderDetailEntity> orderDetailList = orderDetailMapper.selectByExample(example);
+        orderInfo.setOrderDetailList(orderDetailList);
+
+        OrderStatusEntity orderStatusEntity = orderStatusMapper.selectByPrimaryKey(orderInfo.getOrderId());
+        orderInfo.setOrderStatusEntity(orderStatusEntity);
+
+        return this.setResultSuccess(orderInfo);
     }
 }

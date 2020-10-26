@@ -20,6 +20,7 @@
         <module>mingrui-shop-service-api-user</module>
         <module>mingrui-shop-service-api-car</module>
         <module>mingrui-shop-service-api-order</module>
+        <module>mingrui-shop-service-api-pay</module>
     </modules>
 
     <dependencies>
