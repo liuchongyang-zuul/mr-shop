@@ -1,26 +1,33 @@
 package com.baidu.lcy.shop.service.impl;
 
-import com.baidu.lcy.shop.config.JwtConfig;
-import com.baidu.lcy.shop.utils.ObjectUtil;
 import com.baidu.lcy.shop.base.BaseApiService;
 import com.baidu.lcy.shop.base.Result;
+import com.baidu.lcy.shop.config.JwtConfig;
+import com.baidu.lcy.shop.dto.BrandEntity;
 import com.baidu.lcy.shop.dto.Car;
 import com.baidu.lcy.shop.dto.UserInfo;
+import com.baidu.lcy.shop.dto.UserSpuEntity;
 import com.baidu.lcy.shop.entity.SkuEntity;
 import com.baidu.lcy.shop.fegin.GoodsFeign;
+import com.baidu.lcy.shop.mapper.BrandMapper;
+import com.baidu.lcy.shop.mapper.UserSpuMapper;
 import com.baidu.lcy.shop.redis.repository.RedisRepository;
 import com.baidu.lcy.shop.service.CarService;
 import com.baidu.lcy.shop.utils.JSONUtil;
 import com.baidu.lcy.shop.utils.JwtUtils;
+import com.baidu.lcy.shop.utils.ObjectUtil;
 import com.baidu.lcy.shop.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import tk.mybatis.mapper.entity.Example;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -42,6 +49,11 @@ public class CarServiceImpl extends BaseApiService implements CarService {
     @Autowired
     private GoodsFeign goodsFeign;
 
+    @Resource
+    private UserSpuMapper userSpuMapper;
+
+    @Resource
+    private BrandMapper brandMapper;
     @Override
     public Result<JSONObject> addCar(Car car,String token) {
 
@@ -131,4 +143,76 @@ public class CarServiceImpl extends BaseApiService implements CarService {
 
         return this.setResultSuccess();
     }
+
+    @Override
+    public Result<UserSpuEntity> focusOn(UserSpuEntity userSpuEntity, String token) {
+
+        try {
+            UserInfo info = JwtUtils.getInfoFromToken(token, jwtConfig.getPublicKey());
+
+            Example example = new Example(UserSpuEntity.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("brandId",userSpuEntity.getBrandId());
+            criteria.andEqualTo("userId",info.getId());
+            List<UserSpuEntity> userSpuEntities = userSpuMapper.selectByExample(example);
+            if(userSpuEntities.size() > 0){
+                userSpuMapper.deleteByExample(example);
+                return this.setResult(200,"关注店铺",null);
+            }else{
+                Integer userId = info.getId();
+                UserSpuEntity userSpu = new UserSpuEntity();
+                userSpu.setUserId(userId);
+                userSpu.setBrandId(userSpuEntity.getBrandId());
+                userSpuMapper.insertSelective(userSpu);
+                return this.setResult(200,"已关注",null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return this.setResultError("关注错误");
+    }
+
+    @Override
+    public Result<UserSpuEntity> monitoring(UserSpuEntity userSpuEntity, String token) {
+
+        try {
+            UserInfo info = JwtUtils.getInfoFromToken(token, jwtConfig.getPublicKey());
+            Example example = new Example(UserSpuEntity.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("brandId",userSpuEntity.getBrandId());
+            criteria.andEqualTo("userId",info.getId());
+            List<UserSpuEntity> userSpuEntities = userSpuMapper.selectByExample(example);
+            if(userSpuEntities.size() > 0){
+                return this.setResult(200,"已关注",null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return this.setResultError("查询用户关注错误");
+    }
+
+    @Override
+    public Result<List<BrandEntity>> list(String token) {
+        List<com.baidu.lcy.shop.entity.BrandEntity> brandEntities=null;
+        try {
+            UserInfo info = JwtUtils.getInfoFromToken(token, jwtConfig.getPublicKey());
+            Example example = new Example(UserSpuEntity.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("userId",info.getId());
+            List<UserSpuEntity> userSpuEntities = userSpuMapper.selectByExample(example);
+            List<Integer> collect = userSpuEntities.stream().map(userSpu -> {
+                return userSpu.getBrandId();
+            }).collect(Collectors.toList());
+
+            brandEntities  = brandMapper.selectByIdList(collect);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return this.setResultSuccess(brandEntities);
+    }
+
 }

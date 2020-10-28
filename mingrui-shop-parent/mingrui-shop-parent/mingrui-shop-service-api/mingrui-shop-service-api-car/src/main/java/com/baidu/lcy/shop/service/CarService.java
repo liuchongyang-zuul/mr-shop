@@ -1,7 +1,9 @@
 package com.baidu.lcy.shop.service;
 
 import com.baidu.lcy.shop.base.Result;
+import com.baidu.lcy.shop.dto.BrandEntity;
 import com.baidu.lcy.shop.dto.Car;
+import com.baidu.lcy.shop.dto.UserSpuEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.json.JSONObject;
@@ -37,4 +39,16 @@ public interface CarService {
     @ApiOperation(value = "num加减")
     @GetMapping(value = "carNumUpdate")
     Result<List<Car>> carNumUpdate(Long skuId ,Integer type ,@CookieValue(value = "MRSHOP_TOKEN") String token);
+
+    @ApiOperation(value = "关注店铺")
+    @PostMapping(value = "focusOn")
+    Result<UserSpuEntity> focusOn(@RequestBody UserSpuEntity userSpuEntity, @CookieValue(value = "MRSHOP_TOKEN") String token);
+
+    @ApiOperation(value = "查询用户关注")
+    @PostMapping(value = "monitoring")
+    Result<UserSpuEntity> monitoring(@RequestBody UserSpuEntity userSpuEntity,@CookieValue(value = "MRSHOP_TOKEN") String token);
+
+    @ApiOperation(value = "查询用户关注商家")
+    @PostMapping(value = "list")
+    Result<List<BrandEntity>> list(@CookieValue(value = "MRSHOP_TOKEN") String token);
 }

@@ -216,7 +216,11 @@
                                 <ul class="btn-choose unstyled">
                                     <li>
                                         <a href="/success-cart.html" @click.prevent="addCar" target="_blank" class="sui-btn  btn-danger addshopcar">加入购物车</a>
+                                        <a href="/success-cart.html" @click.prevent="focusOn" target="_blank" class="sui-btn  btn-danger addshopcar">{{title}}</a>
+<!--                                        <button v-if="monitoring" @click="focusOn" class="sui-btn  btn-danger addshopcar">关注店铺</button>-->
+<!--                                        <button v-else @click="noFocusOn" class="sui-btn  btn-danger addshopcar">取消关注店铺</button>-->
                                     </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -652,7 +656,6 @@
     const spuDetailBydSpuData = /*[[ ${spuDetailBydSpuData} ]]*/{};
     const specialSpec = JSON.parse(/*[[ ${spuDetailBydSpuData.specialSpec} ]]*/);
     const skuBydSpuData = /*[[ ${skuBydSpuData} ]]*/[];
-
     const SpecGroud = /*[[ ${SpecGroud} ]]*/[];
     const genSpec = JSON.parse(/*[[ ${spuDetailBydSpuData.genericSpec} ]]*/);
     const indexes = {};
@@ -676,12 +679,39 @@
             SpecGroud,
             genSpec,
             mrshop,
-            num:1
+            num:1,
+            // monitoring:true,//1为用户未收藏该店铺2为已收藏
+            title:"关注店铺"
         },
         components:{
             b2cTop: () => import('/js/pages/top.js')
         },
+        created() {
+            mrshop.checkUserLogin().then(resp => {
+                mrshop.http.post('/car/monitoring',{
+                    brandId:spuInfo.brandId
+                }).then(resp => {
+                    if(resp.data.code == 200){
+                        this.title = resp.data.message;
+                    }
+                }).catch(error => console.log(error))
+            }).catch(error => console.log(error))
+        },
         methods:{
+            focusOn(){
+                //console.log(spuInfo.brandId);
+                mrshop.checkUserLogin().then(resp => {
+                    mrshop.http.post('/car/focusOn',{
+                        brandId:spuInfo.brandId
+                    }).then(resps => {
+                        if(resps.data.code == 200){
+                            this.title = resps.data.message;
+                        }
+                    }).catch(error => console.log(error))
+                }).catch(error => {
+                    window.location = "/login.html?returnUrl=" + window.location;
+                })
+            },
             increment () {
                 if(this.num < this.sku.stock) this.num++;
             },
