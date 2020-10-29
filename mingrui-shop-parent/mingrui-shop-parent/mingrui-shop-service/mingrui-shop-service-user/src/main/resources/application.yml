@@ -66,3 +66,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+mrshop:
+  jwt:
+    pubKeyPath: D:\res\rea.pub # 公钥地址
+    cookieName: MRSHOP_TOKEN # cookie的名称

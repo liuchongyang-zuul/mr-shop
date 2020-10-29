@@ -1,17 +1,16 @@
 package com.baidu.lcy.shop.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baidu.lcy.shop.dto.UserDTO;
-import com.baidu.lcy.shop.entity.UserEntity;
 import com.baidu.lcy.shop.base.Result;
+import com.baidu.lcy.shop.dto.UserDTO;
+import com.baidu.lcy.shop.entity.AddressEntity;
+import com.baidu.lcy.shop.entity.CityEntity;
+import com.baidu.lcy.shop.entity.UserEntity;
 import com.baidu.lcy.shop.validate.group.MingRuiOperation;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,4 +39,28 @@ public interface UserService {
     @GetMapping(value = "user/checkCode")
     @ApiOperation(value = "验证码验证")
     Result<JSONObject> checkCode(String phone,String validcode);
+
+    @ApiOperation(value = "三级联动")
+    @GetMapping(value = "oneCity")
+    Result<List<CityEntity>> oneCity(@RequestParam Integer id);
+
+    @ApiOperation(value = "添加用户地址")
+    @PostMapping(value = "add")
+    Result<JSONObject> add(@RequestBody AddressEntity addressEntity,@CookieValue(value = "MRSHOP_TOKEN") String token);
+
+    @ApiOperation(value = "查询用户地址")
+    @GetMapping(value = "list")
+    Result<JSONObject> list(@CookieValue(value = "MRSHOP_TOKEN") String token);
+
+    @ApiOperation(value = "删除用户有地址")
+    @DeleteMapping(value = "del")
+    Result<JSONObject> del(@RequestParam Integer id,@CookieValue(value = "MRSHOP_TOKEN") String token);
+
+    @ApiOperation(value = "更改默认选择的地址")
+    @PutMapping(value = "updateDefault")
+    Result<JSONObject> updateDefault(@RequestBody AddressEntity addressEntity,@CookieValue(value = "MRSHOP_TOKEN") String token);
+
+    @ApiOperation(value = "查询用户的地址")
+    @GetMapping(value = "onComplie")
+    Result<JSONObject> onComplie(@RequestParam Integer id,@CookieValue(value = "MRSHOP_TOKEN") String token);
 }
