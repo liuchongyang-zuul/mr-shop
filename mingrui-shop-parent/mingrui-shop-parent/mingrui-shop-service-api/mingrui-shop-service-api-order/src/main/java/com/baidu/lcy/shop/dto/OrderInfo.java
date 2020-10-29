@@ -16,7 +16,12 @@ import java.util.List;
  **/
 @Data
 public class OrderInfo {
+
+    private Integer total;//t
+
+    private Integer totalPage;
     private Long orderId;//订单id
+    private String orderStringId;//订单id
 
     private Long totalPay;//总金额,单位为分
 

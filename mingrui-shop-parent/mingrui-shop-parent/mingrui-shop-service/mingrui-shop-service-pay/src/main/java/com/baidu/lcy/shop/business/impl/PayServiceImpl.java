@@ -88,6 +88,8 @@ public class PayServiceImpl extends BaseApiService implements PayService {
                 e.printStackTrace();
             }
 
+            orderFeign.state(payInfoDTO.getOrderId());
+
             out.println(result);
         }
     }

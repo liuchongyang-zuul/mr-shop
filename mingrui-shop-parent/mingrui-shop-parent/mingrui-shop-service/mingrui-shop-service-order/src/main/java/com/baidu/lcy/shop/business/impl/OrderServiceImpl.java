@@ -19,6 +19,10 @@ import com.baidu.lcy.shop.status.HTTPStatus;
 import com.baidu.lcy.shop.utils.BaiduBeanUtil;
 import com.baidu.lcy.shop.utils.IdWorker;
 import com.baidu.lcy.shop.utils.JwtUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.entity.Example;
 
@@ -36,6 +40,7 @@ import java.util.stream.Collectors;
  * @Version V1.0
  **/
 @RestController
+@Slf4j
 public class OrderServiceImpl  extends BaseApiService implements OrderService {
     @Resource
     private OrderMapper orderMapper;
@@ -134,5 +139,91 @@ public class OrderServiceImpl  extends BaseApiService implements OrderService {
         orderInfo.setOrderStatusEntity(orderStatusEntity);
 
         return this.setResultSuccess(orderInfo);
+    }
+
+    @Override
+    public Result<OrderInfo> state(OrderStatusEntity orderStatusEntity) {
+        if(orderStatusEntity.getStatus() == 2){
+            OrderStatusEntity entity = new OrderStatusEntity();
+            entity.setOrderId(orderStatusEntity.getOrderId());
+            entity.setStatus(3);
+            orderStatusMapper.updateByPrimaryKeySelective(entity);
+            return this.setResultSuccess();
+        }else if(orderStatusEntity.getStatus() == 3){
+            OrderStatusEntity entity = new OrderStatusEntity();
+            entity.setOrderId(orderStatusEntity.getOrderId());
+            entity.setStatus(4);
+            orderStatusMapper.updateByPrimaryKeySelective(entity);
+            return this.setResultSuccess();
+        }else if(orderStatusEntity.getStatus() == 4){
+            OrderStatusEntity entity = new OrderStatusEntity();
+            entity.setOrderId(orderStatusEntity.getOrderId());
+            entity.setStatus(5);
+            orderStatusMapper.updateByPrimaryKeySelective(entity);
+            return this.setResultSuccess();
+        }else if(orderStatusEntity.getStatus() == 5){
+            OrderStatusEntity entity = new OrderStatusEntity();
+            entity.setOrderId(orderStatusEntity.getOrderId());
+            entity.setStatus(6);
+            orderStatusMapper.updateByPrimaryKeySelective(entity);
+            return this.setResultSuccess();
+        }
+        OrderStatusEntity entity = new OrderStatusEntity();
+        entity.setOrderId(orderStatusEntity.getOrderId());
+        entity.setStatus(2);
+        orderStatusMapper.updateByPrimaryKeySelective(entity);
+        return this.setResultSuccess();
+    }
+
+    @Override
+    public Result<JSONObject> list(Integer page,Integer row,String token) {
+        try {
+            UserInfo info = JwtUtils.getInfoFromToken(token, jwtConfig.getPublicKey());
+            Example example = new Example(OrderEntity.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("userId",info.getId() + "");
+            if(page != null && row != null){
+                PageHelper.startPage(page,row);
+            }
+            List<OrderEntity> orderEntities = orderMapper.selectByExample(example);
+            PageInfo<OrderEntity> pageInfo = new PageInfo<>(orderEntities);
+            log.debug(String.valueOf(pageInfo));
+            List<OrderInfo> collect = orderEntities.stream().map(orderEntity -> {
+                OrderInfo orderInfo = new OrderInfo();
+
+                Example detailExample = new Example(OrderDetailEntity.class);
+                Example.Criteria detailCriteria = detailExample.createCriteria();
+                detailCriteria.andEqualTo("orderId", orderEntity.getOrderId());
+                List<OrderDetailEntity> orderDetailEntities = orderDetailMapper.selectByExample(detailExample);
+                orderInfo.setOrderDetailList(orderDetailEntities);
+
+                Example statusExample = new Example(OrderStatusEntity.class);
+                Example.Criteria statusCriteria = statusExample.createCriteria();
+                statusCriteria.andEqualTo("orderId", orderEntity.getOrderId());
+                List<OrderStatusEntity> orderStatusEntities = orderStatusMapper.selectByExample(statusExample);
+                orderInfo.setOrderStatusEntity(orderStatusEntities.get(0));
+
+                orderInfo.setOrderId(orderEntity.getOrderId());
+                orderInfo.setOrderStringId(orderEntity.getOrderId()+"");
+                orderInfo.setTotalPay(orderEntity.getTotalPay());
+                orderInfo.setActualPay(orderEntity.getActualPay());
+                orderInfo.setPromotionIds(orderEntity.getPromotionIds());
+                orderInfo.setPaymentType(orderEntity.getPaymentType());
+                orderInfo.setCreateTime(orderEntity.getCreateTime());
+                orderInfo.setUserId(orderEntity.getUserId());
+                orderInfo.setBuyerMessage(orderEntity.getBuyerMessage());
+                orderInfo.setBuyerNick(orderEntity.getBuyerNick());
+                orderInfo.setBuyerRate(orderEntity.getBuyerRate());
+                orderInfo.setInvoiceType(orderEntity.getInvoiceType());
+                orderInfo.setSourceType(orderEntity.getSourceType());
+                return orderInfo;
+            }).collect(Collectors.toList());
+
+            return this.setResult(200,pageInfo.getPages()+"",collect);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return this.setResultSuccess();
     }
 }

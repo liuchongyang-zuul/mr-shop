@@ -19,4 +19,7 @@ public interface OrderFeign {
 
     @GetMapping(value = "getOrderInfoByOrderId")
     Result<OrderInfo> getOrderInfoByOrderId(@RequestParam Long orderId);
+
+    @GetMapping(value = "state")
+    Result<OrderInfo> state(@RequestParam Long orderId);
 }
