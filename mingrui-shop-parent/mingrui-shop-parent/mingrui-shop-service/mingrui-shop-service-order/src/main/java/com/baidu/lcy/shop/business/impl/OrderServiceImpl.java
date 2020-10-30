@@ -226,4 +226,35 @@ public class OrderServiceImpl  extends BaseApiService implements OrderService {
 
         return this.setResultSuccess();
     }
+
+    @Override
+    public Result<JSONObject> sales(Integer id) {
+
+        Example detailExample = new Example(OrderDetailEntity.class);
+        Example.Criteria detailCriteria = detailExample.createCriteria();
+        detailCriteria.andEqualTo("id",id);
+        List<OrderDetailEntity> orderDetailEntitie = orderDetailMapper.selectByExample(detailExample);
+
+        Example example1 = new Example(OrderDetailEntity.class);
+        Example.Criteria criteria1 = example1.createCriteria();
+        criteria1.andEqualTo("orderId",orderDetailEntitie.get(0).getOrderId());
+        List<OrderDetailEntity> orderDetailEntities = orderDetailMapper.selectByExample(example1);
+
+        if(orderDetailEntities.size() <=1){
+            orderDetailMapper.deleteByExample(detailExample);
+
+            Example example = new Example(OrderEntity.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("orderId",orderDetailEntities.get(0).getOrderId());
+            orderMapper.deleteByExample(example);
+
+            Example statusExample = new Example(OrderStatusEntity.class);
+            Example.Criteria statusCriteria = statusExample.createCriteria();
+            statusCriteria.andEqualTo("orderId",orderDetailEntities.get(0).getOrderId());
+            orderStatusMapper.deleteByExample(statusExample);
+            return this.setResultSuccess();
+        }
+        orderDetailMapper.deleteByExample(detailExample);
+        return this.setResultSuccess();
+    }
 }

@@ -35,4 +35,8 @@ public interface OrderService {
     @ApiModelProperty(value = "根据订单id查询订单信息")
     @GetMapping(value = "list")
     Result<JSONObject> list(@RequestParam Integer page,@RequestParam Integer row,@CookieValue(value = "MRSHOP_TOKEN") String token);
+
+    @ApiModelProperty(value = "退货退款")
+    @GetMapping(value = "sales")
+    Result<JSONObject> sales(@RequestParam Integer id);
 }
